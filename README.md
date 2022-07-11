@@ -1,4 +1,4 @@
-# KingGen Java
+# Azura Java
 
 [![](https://jitpack.io/v/azura-client/Azura4J.svg)](https://jitpack.io/#DxsSucuk/KingGenJava)
 
