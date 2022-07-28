@@ -15,7 +15,7 @@
 
 <dependencies>
   <dependency>
-    <groupId>com.github.azura-client</groupId>
+    <groupId>best.azura</groupId>
     <artifactId>Azura4J</artifactId>
     <version>Tag</version>
   </dependency>
