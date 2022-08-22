@@ -17,7 +17,7 @@ public enum Endpoint {
     // Base API information such as the currently used Version and the URL.
     private static final int BASE_API_VERSION = 1;
     private static final String BASE_API_PATH = "public";
-    public static final String BASE_API_URL = String.format("https://api.azura.best/api/%s", BASE_API_PATH);
+    public static final String BASE_API_URL = String.format("https://api.azura.best/%s", BASE_API_PATH);
 
     // The Endpoint routes.
     private final String route;

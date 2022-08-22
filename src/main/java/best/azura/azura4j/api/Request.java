@@ -69,10 +69,15 @@ public class Request {
         String responseContent = new BufferedReader(new InputStreamReader((100 <= httpURLConnection.getResponseCode() && httpURLConnection.getResponseCode() <= 399 ? httpURLConnection.getInputStream() : httpURLConnection.getErrorStream()), StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
         JsonStreamParser jsonStreamParser = new JsonStreamParser(responseContent);
         JsonElement jsonElement = jsonStreamParser.hasNext() ? jsonStreamParser.next() : new JsonObject();
+        System.out.println(jsonElement);
         // Check if the Server response was valid, if so continue parsing the data.
         if (httpURLConnection.getResponseCode() == 200) {
             if (!jsonElement.isJsonObject() || !jsonElement.getAsJsonObject().has("success") || !jsonElement.getAsJsonObject().get("success").getAsBoolean()) {
-                throw new AzuraInvalidRequestException("Server return an Error: " + jsonElement.getAsJsonObject().get("message").getAsString());
+                if (jsonElement.getAsJsonObject().has("message") && jsonElement.getAsJsonObject().get("message").getAsString().equalsIgnoreCase("Invalid Key.")) {
+                    throw new AzuraInvalidApiKeyException();
+                } else {
+                    throw new AzuraInvalidRequestException("Server return an Error: " + jsonElement.getAsJsonObject().get("message").getAsString());
+                }
             }
             try {
                 // Check if the Endpoint is a Profile or not, if so then try to parse it into a KingGenProfile. Same for KingGenAccount.
